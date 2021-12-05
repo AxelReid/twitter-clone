@@ -19,7 +19,12 @@ const Sidebar = () => {
   return (
     <div className='hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] xl:ml-24 p-2 h-screen sticky top-0'>
       <div className='flex items-center justify-center w-14 h-14 hoverAnimation p-0'>
-        <Image src='https://rb.gy/ogau5a' width={30} height={30} />
+        <Image
+          src='https://rb.gy/ogau5a'
+          width={30}
+          height={30}
+          className='dark:invert-0 invert'
+        />
       </div>
       <div className='space-y-4 mt-4 mb-2.5'>
         <SidebarLink text='Home' Icon={HomeIcon} active />
@@ -35,7 +40,7 @@ const Sidebar = () => {
         Tweet
       </button>
       <div
-        className='text-[#d9d9d9] flex items-center justify-center hoverAnimation mt-auto'
+        className='color-2 flex items-center justify-center hoverAnimation mt-auto'
         onClick={() => signOut()}
       >
         <img

@@ -1,36 +1,40 @@
-import Head from 'next/head'
-import Sidebar from 'components/Sidebar'
+import { useEffect } from 'react'
 import Feed from 'components/Feed'
 import { getProviders, getSession, useSession } from 'next-auth/react'
 import Login from 'components/Login'
-import Modal from 'components/Modal'
-import { modalState } from 'atoms/modalAtom'
+import { themeState } from 'atoms/modalAtom'
 import { useRecoilState } from 'recoil'
 import Widgets from 'components/Widgets'
+import Hoc from 'components/Hoc'
 
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession()
-  const [isOpen, setIsOpen] = useRecoilState(modalState)
+  const [theme, setTheme] = useRecoilState(themeState)
+
+  useEffect(() => {
+    console.log('ufff')
+    const savedTheme = localStorage.getItem('theme')
+    const html = document.documentElement.classList
+    if (savedTheme === 'light') {
+      html.remove('dark')
+      setTheme('')
+      return
+    }
+    html.add('dark')
+    setTheme('dark')
+  }, [])
 
   if (!session) {
     return <Login providers={providers} />
   }
-
   return (
-    <div>
-      <Head>
-        <title>Twitter</title>
-      </Head>
-      <main className='bg-black min-h-screen max-w-[1500px] mx-auto flex'>
-        <Sidebar />
-        <Feed />
-        <Widgets
-          trendingResults={trendingResults}
-          followResults={followResults}
-        />
-        {isOpen && <Modal />}
-      </main>
-    </div>
+    <Hoc>
+      <Feed />
+      <Widgets
+        trendingResults={trendingResults}
+        followResults={followResults}
+      />
+    </Hoc>
   )
 }
 

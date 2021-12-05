@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {
   collection,
   doc,
@@ -9,21 +8,15 @@ import {
 import { getProviders, getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { modalState } from 'atoms/modalAtom'
-import Modal from 'components/Modal'
-import Sidebar from 'components/Sidebar'
-// import Widgets from 'components/Widgets'
 import Post from 'components/Post'
 import { db } from 'firebase.js'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import Comment from 'components/Comment'
 import Login from 'components/Login'
+import Hoc from 'components/Hoc'
 
 const PostPage = (providers) => {
   const { data: session } = useSession()
-
-  const [isOpen, setIsOpen] = useRecoilState(modalState)
   const [post, setPost] = useState()
   const [comments, setComments] = useState([])
   const router = useRouter()
@@ -54,43 +47,31 @@ const PostPage = (providers) => {
   }
 
   return (
-    <div>
-      <Head>
-        <title>
-          {post?.username} on Twitter: &quot;{post?.text}&quot;
-        </title>
-      </Head>
-      <main className='bg-black min-h-screen max-w-[1500px] mx-auto flex'>
-        <Sidebar />
-        <div className='flex-grow border-l border-r border-gray-700 max-w-xl'>
-          <div className='flex items-center px-1.5 py-2 border-b border-gray-700 text-[#d9d9d9] font-semibold text-xl gap-x-4 sticky top-0 z-50 bg-black'>
-            <div
-              className='hoverAnimation w-9 h-9 flex items-center justify-center'
-              onClick={() => router.push('/')}
-            >
-              <ArrowLeftIcon className='h-5 text-md text-white' />
-            </div>
-            Tweet
+    <Hoc title={post?.username + ' on Twitter: ' + post?.text}>
+      <div className='flex-grow border-l border-r border-1 max-w-3xl'>
+        <div className='flex items-center px-1.5 py-2 border-b border-1 color-2 font-semibold text-xl gap-x-4 sticky top-0 z-50 bg-1'>
+          <div
+            className='hoverAnimation w-9 h-9 flex items-center justify-center p-0'
+            onClick={() => router.push('/')}
+          >
+            <ArrowLeftIcon className='h-5 text-sm color-1' />
           </div>
-          <Post id={id} post={post} postPage />
-          {comments.length > 0 && (
-            <div>
-              {comments.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  id={comment.id}
-                  comment={comment.data()}
-                />
-              ))}
-            </div>
-          )}
+          Tweet
         </div>
-        {/* Widgets */}
-
-        {/* Modal */}
-        {isOpen && <Modal />}
-      </main>
-    </div>
+        <Post id={id} post={post} postPage />
+        {comments.length > 0 && (
+          <div>
+            {comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                id={comment.id}
+                comment={comment.data()}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </Hoc>
   )
 }
 

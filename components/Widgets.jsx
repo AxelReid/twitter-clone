@@ -5,18 +5,18 @@ import Trending from './Trending'
 const Widgets = ({ trendingResults, followResults }) => {
   return (
     <div className='hidden lg:inline flex-[0.33] space-y-5 px-[2%]'>
-      <div className='sticky top-0 py-1.5 bg-black z-50 w-full'>
-        <div className='relative flex items-center bg-[#202327] p-3 rounded-full'>
+      <div className='sticky top-0 py-1.5 bg-1 z-50 w-full'>
+        <div className='relative flex items-center bg-2 p-3 rounded-full'>
           <SearchIcon className='text-gray-500 h-5 z-50' />
           <input
             type='text'
-            className='bg-transparent placeholder-gray-500 outline-none border border-transparent w-full text-[#d9d9d9] inset-0 absolute pl-11 focus:bg-black rounded-full focus:border-[#1d9bf0] focus:shadow-lg'
+            className='bg-transparent placeholder-gray-500 outline-none border border-transparent w-full color-2 inset-0 absolute pl-11 focus:bg-1 rounded-full focus:border-[#1d9bf0] focus:shadow-lg'
             placeholder='Search Tweet'
           />
         </div>
       </div>
 
-      <div className='text-[#d9d9d9] space-y-3 bg-[#15181c] pt-2 rounded-xl w-full'>
+      <div className='color-2 space-y-3 bg-2 pt-2 rounded-xl w-full'>
         <h4 className='font-bold text-xl px-4'>What&apos;s happening</h4>
         {trendingResults.map((result, i) => (
           <Trending key={i} result={result} />
@@ -26,7 +26,7 @@ const Widgets = ({ trendingResults, followResults }) => {
         </button>
       </div>
 
-      <div className='text-[#d9d9d9] space-y-3 bg-[#15181c] pt-2 rounded-xl w-full'>
+      <div className='color-2 space-y-3 bg-2 pt-2 rounded-xl w-full'>
         <h4 className='font-bold text-xl px-4'>Who to follow</h4>
         {followResults.map((result, index) => (
           <div

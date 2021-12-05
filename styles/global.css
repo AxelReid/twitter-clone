@@ -4,18 +4,36 @@
 
 @layer base {
   body {
-    @apply bg-black;
+    @apply dark:bg-black bg-white;
   }
 }
 
 @layer components {
   .hoverAnimation {
-    @apply hover:bg-[#d9d9d9] hover:bg-opacity-10 rounded-full cursor-pointer w-[52px] h-[52px] xl:w-auto xl:h-auto xl:py-3 xl:px-4 transition duration-200 ease-out;
+    @apply hover:bg-[#d9d9d9] hover:bg-opacity-20 rounded-full cursor-pointer w-[52px] h-[52px] xl:w-auto xl:h-auto xl:py-3 xl:px-4 transition duration-200 ease-out;
   }
   .icon {
     @apply cursor-pointer w-9 h-9 hover:bg-[#1d9bf0] hover:bg-opacity-10 flex items-center justify-center rounded-full transition ease-out;
   }
   .tag {
     @apply text-[#1d9bf0] font-normal hover:underline cursor-pointer;
+  }
+  .color-1 {
+    @apply dark:text-white text-black;
+  }
+  .color-2 {
+    @apply dark:text-[#d9d9d9] text-black;
+  }
+  .border-1 {
+    @apply dark:border-gray-700 border-gray-200;
+  }
+  .divide-cl {
+    @apply dark:divide-gray-700 divide-gray-200;
+  }
+  .bg-1 {
+    @apply dark:bg-black bg-white;
+  }
+  .bg-2 {
+    @apply dark:bg-[#15181c] bg-gray-100;
   }
 }

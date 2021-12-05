@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 
 const Comment = ({ id, comment }) => {
   return (
-    <div className='p-3 flex cursor-pointer border-b border-gray-700'>
+    <div className='p-3 flex cursor-pointer border-b border-1'>
       <img
         src={comment?.userImg}
         alt=''
@@ -19,7 +19,7 @@ const Comment = ({ id, comment }) => {
         <div className='flex justify-between'>
           <div className='text-[#6e767d]'>
             <div className='inline-block group'>
-              <h4 className='font-bold text-[#d9d9d9] text-[15px] sm:text-base inline-block group-hover:underline'>
+              <h4 className='font-bold color-2 text-[15px] sm:text-base inline-block group-hover:underline'>
                 {comment?.username}
               </h4>
               <span className='ml-1.5 text-sm sm:text-[15px]'>
@@ -30,7 +30,7 @@ const Comment = ({ id, comment }) => {
             <span className='hover:underline text-sm sm:text-[15px]'>
               <Moment fromNow>{comment?.timestamp?.toDate()}</Moment>
             </span>
-            <p className='text-[#d9d9d9] mt-0.5 max-w-lg text-[15px] sm:text-base'>
+            <p className='color-2 mt-0.5 max-w-lg text-[15px] sm:text-base'>
               {comment?.comment}
             </p>
           </div>

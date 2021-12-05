@@ -18,6 +18,8 @@ import {
   updateDoc,
 } from '@firebase/firestore'
 import { useSession } from 'next-auth/react'
+import { themeState } from 'atoms/modalAtom'
+import { useRecoilState } from 'recoil'
 
 const Input = () => {
   const filePickerRef = useRef(null)
@@ -26,6 +28,7 @@ const Input = () => {
   const [selectedFile, setSelectedFile] = useState('')
   const [showEmojis, setShowEmojis] = useState(false)
   const { data: session } = useSession()
+  const [darkTheme, setTheme] = useRecoilState(themeState)
 
   const sendPost = async () => {
     if (loading) return
@@ -76,7 +79,7 @@ const Input = () => {
 
   return (
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 ${
+      className={`border-b border-1 p-3 flex space-x-3 ${
         loading && 'opacity-60'
       }`}
     >
@@ -85,13 +88,13 @@ const Input = () => {
         alt=''
         className='rounded-full w-11 h-11 cursor-pointer'
       />
-      <div className='w-full divide-y divide-gray-700'>
+      <div className='w-full divide-y divide-cl'>
         <div className={`${selectedFile && 'pb-7'} ${input && 'space-y-2.5'}`}>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows='2'
-            className='bg-transparent outline-none text-[#d9d9d9] placeholder-gray-500 tracking-wide w-full min-h-[50px]'
+            className='bg-transparent outline-none color-2 placeholder-gray-500 tracking-wide w-full min-h-[50px]'
             placeholder='What is happening?'
           />
 
@@ -140,7 +143,7 @@ const Input = () => {
               {showEmojis && (
                 <Picker
                   onSelect={addEmoji}
-                  theme='dark'
+                  theme={darkTheme ? 'dark' : 'light'}
                   style={{
                     position: 'absolute',
                     top: '100%',
